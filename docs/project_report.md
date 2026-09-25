@@ -13,7 +13,7 @@
 
 ## 2. Introduction
 
-Students often make frequent small purchases for food, travel, stationery, and other needs. Without a record, it is difficult to understand spending habits. Smart Expense Tracker is a simple terminal application that records these purchases and presents a clear monthly summary. It is designed to apply fundamental Python concepts such as functions, classes, lists, conditions, loops, file/database handling, and input validation to a real-world problem.
+Students often make frequent small purchases for food, travel, stationery, and other needs. Without a record, it is difficult to understand spending habits. Smart Expense Tracker is a simple Python application with a Streamlit browser interface that records these purchases and presents a clear monthly summary. It is designed to apply fundamental Python concepts such as functions, classes, lists, conditions, loops, file/database handling, and input validation to a real-world problem.
 
 ## 3. Problem Statement
 
@@ -48,7 +48,7 @@ The three major functional modules are category management, expense management, 
 
 ```mermaid
 flowchart LR
-    U[Student] --> M[Terminal menu: app.py]
+    U[Student] --> M[Streamlit UI: streamlit_app.py]
     M --> S[Service classes]
     S --> V[validators.py]
     S --> D[database.py]
@@ -57,7 +57,7 @@ flowchart LR
     O --> U
 ```
 
-`app.py` receives the user's choice. It calls service classes, which validate data and read/write SQLite through the `Database` class. Display helpers format returned data for the terminal.
+`streamlit_app.py` receives the user's input through forms and buttons. It calls service classes, which validate data and read/write SQLite through the `Database` class. Streamlit displays tables, messages, and the monthly chart.
 
 ## 7. Design Diagrams
 
@@ -142,7 +142,7 @@ erDiagram
 ## 8. Design Decisions and Rationale
 
 - Python was selected because it matches the project requirement and is suitable for first-year programming concepts.
-- A terminal interface was selected because it keeps the focus on Python logic rather than web or GUI frameworks.
+- Streamlit was selected because it creates a clear browser interface with simple Python code, without requiring complex web development.
 - SQLite was selected because it is included with Python, requires no server, and still demonstrates structured storage and SQL.
 - Separate service and validation modules make the code easier to read, test, and explain without using an unnecessarily complex architecture.
 
@@ -150,7 +150,7 @@ erDiagram
 
 | File | Responsibility |
 | --- | --- |
-| `app.py` | Application menu and user interaction. |
+| `streamlit_app.py` | Streamlit pages, forms, tables, and user interaction. |
 | `database.py` | Creates tables, starter categories, and SQLite connections. |
 | `services.py` | Category, expense, budget, and report operations. |
 | `validators.py` | Checks amounts, dates, months, and text fields. |
@@ -164,7 +164,7 @@ The database is created automatically at `data/expense_tracker.db` when `python 
 
 Insert genuine screenshots captured from this implementation. Do not replace these placeholders with invented images or results.
 
-**[Screenshot placeholder 1: Main menu after `python app.py`]**
+**[Screenshot placeholder 1: Streamlit Expenses page after `python -m streamlit run streamlit_app.py`]**
 
 **[Screenshot placeholder 2: Successful Add Expense interaction]**
 
@@ -214,4 +214,3 @@ python -m unittest discover -s tests -v
 1. Python Software Foundation, *Python 3 Documentation*: https://docs.python.org/3/
 2. SQLite, *SQLite Documentation*: https://www.sqlite.org/docs.html
 3. Assignment document, *VITyarthi — Build Your Own Project General Project Instructions & Submission Guidelines*.
-
