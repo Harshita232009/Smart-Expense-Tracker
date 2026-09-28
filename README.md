@@ -1,6 +1,6 @@
 # Smart Expense Tracker
 
-A simple terminal-based Python application that helps a student record daily expenses, organise them by category, set category budgets, and review monthly spending. It was created as a first-year CSE project for the VITyarthi Build Your Own Project assignment.
+A simple Streamlit application that helps a student record daily expenses, organise them by category, set category budgets, and review monthly spending. It was created as a first-year CSE project for the VITyarthi Build Your Own Project assignment.
 
 ## Features
 
@@ -25,12 +25,10 @@ No third-party package is required.
 
 ```text
 streamlit_app.py    Streamlit browser interface
-app.py              original terminal interface (optional alternative)
 database.py          SQLite database setup and connections
 models.py            Expense and BudgetStatus data classes
 services.py          category, expense, budget, and report operations
 validators.py        reusable input validation
-display.py           terminal table display helpers
 tests/               automated tests
 docs/                report source, diagrams, and screenshot placeholders
 statement.md         required project statement
@@ -52,7 +50,7 @@ statement.md         required project statement
    python -m streamlit run streamlit_app.py
    ```
 
-The command opens the application in a browser. It automatically creates `data/expense_tracker.db` and starter categories on the first run. The original terminal version can still be started with `python app.py`.
+The command opens the application in a browser. It automatically creates `data/expense_tracker.db` and starter categories on the first run.
 
 ## Testing
 

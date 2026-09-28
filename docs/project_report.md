@@ -53,8 +53,7 @@ flowchart LR
     S --> V[validators.py]
     S --> D[database.py]
     D --> DB[(SQLite database)]
-    S --> O[display.py]
-    O --> U
+    M --> U
 ```
 
 `streamlit_app.py` receives the user's input through forms and buttons. It calls service classes, which validate data and read/write SQLite through the `Database` class. Streamlit displays tables, messages, and the monthly chart.
@@ -93,7 +92,7 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     actor Student
-    participant App as app.py
+    participant App as Streamlit UI
     participant Service as ExpenseService
     participant Validator as validators.py
     participant DB as SQLite
@@ -155,10 +154,9 @@ erDiagram
 | `services.py` | Category, expense, budget, and report operations. |
 | `validators.py` | Checks amounts, dates, months, and text fields. |
 | `models.py` | Defines simple `Expense` and `BudgetStatus` data classes. |
-| `display.py` | Prints readable terminal tables. |
 | `tests/` | Automated validator and service tests. |
 
-The database is created automatically at `data/expense_tracker.db` when `python app.py` is run. The initial categories are Food, Travel, Shopping, Bills, and Other.
+The database is created automatically at `data/expense_tracker.db` when `python -m streamlit run streamlit_app.py` is run. The initial categories are Food, Travel, Shopping, Bills, and Other.
 
 ## 10. Screenshots / Results
 
@@ -191,8 +189,8 @@ python -m unittest discover -s tests -v
 ## 12. Challenges Faced
 
 - Designing a storage structure that remains understandable while linking expenses and budgets to categories.
-- Handling invalid terminal input without stopping the entire application.
-- Presenting database records in readable terminal tables.
+- Handling invalid form input without stopping the entire application.
+- Presenting database records in clear browser tables.
 
 ## 13. Learnings and Key Takeaways
 
