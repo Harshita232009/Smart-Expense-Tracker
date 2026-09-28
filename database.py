@@ -1,36 +1,28 @@
-"""SQLite connection and table setup for the Smart Expense Tracker."""
-
 import sqlite3
 from pathlib import Path
 
 
 class ClosingConnection(sqlite3.Connection):
-    """A SQLite connection that closes after a ``with`` block on Windows too."""
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        result = super().__exit__(exc_type, exc_value, traceback)
+    def __exit__(self, typ, val, trace):
+        res = super().__exit__(typ, val, trace)
         self.close()
-        return result
+        return res
 
 
 class Database:
-    """Creates and supplies connections to the application's SQLite database."""
-
-    def __init__(self, database_path="data/expense_tracker.db"):
-        self.database_path = database_path
+    def __init__(self, path="data/expense_tracker.db"):
+        self.path = path
 
     def connect(self):
-        """Return a connection whose rows can be accessed using column names."""
-        connection = sqlite3.connect(self.database_path, factory=ClosingConnection)
-        connection.row_factory = sqlite3.Row
-        connection.execute("PRAGMA foreign_keys = ON")
-        return connection
+        con = sqlite3.connect(self.path, factory=ClosingConnection)
+        con.row_factory = sqlite3.Row
+        con.execute("PRAGMA foreign_keys = ON")
+        return con
 
     def initialize(self):
-        """Create application tables and starter categories when needed."""
-        Path(self.database_path).parent.mkdir(parents=True, exist_ok=True)
-        with self.connect() as connection:
-            connection.executescript(
+        Path(self.path).parent.mkdir(parents=True, exist_ok=True)
+        with self.connect() as con:
+            con.executescript(
                 """
                 CREATE TABLE IF NOT EXISTS categories (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,6 +50,6 @@ class Database:
                 """
             )
             for name in ("Food", "Travel", "Shopping", "Bills", "Other"):
-                connection.execute(
+                con.execute(
                     "INSERT OR IGNORE INTO categories (name) VALUES (?)", (name,)
                 )
