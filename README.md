@@ -14,6 +14,7 @@ A simple terminal-based Python application that helps a student record daily exp
 ## Technologies and tools
 
 - Python 3.10 or later
+- Streamlit for the browser-based user interface
 - SQLite database through Python's built-in `sqlite3` module
 - Python `unittest` for validation and service tests
 - Git and GitHub for version control
@@ -23,7 +24,8 @@ No third-party package is required.
 ## Project structure
 
 ```text
-app.py              menu and application workflow
+streamlit_app.py    Streamlit browser interface
+app.py              original terminal interface (optional alternative)
 database.py          SQLite database setup and connections
 models.py            Expense and BudgetStatus data classes
 services.py          category, expense, budget, and report operations
@@ -38,13 +40,19 @@ statement.md         required project statement
 
 1. Install Python 3.10 or newer.
 2. Clone the repository and open a terminal in its folder.
-3. Run:
+3. Install the one required package:
 
    ```bash
-   python app.py
+   python -m pip install -r requirements.txt
    ```
 
-The application automatically creates `data/expense_tracker.db` and starter categories on the first run.
+4. Start the application:
+
+   ```bash
+   python -m streamlit run streamlit_app.py
+   ```
+
+The command opens the application in a browser. It automatically creates `data/expense_tracker.db` and starter categories on the first run. The original terminal version can still be started with `python app.py`.
 
 ## Testing
 

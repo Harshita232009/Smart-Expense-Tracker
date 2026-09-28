@@ -1,5 +1,3 @@
-"""Simple data classes used to represent tracker records."""
-
 from dataclasses import dataclass
 
 
@@ -21,4 +19,3 @@ class BudgetStatus:
     @property
     def remaining(self):
         return self.budget - self.spent
-
