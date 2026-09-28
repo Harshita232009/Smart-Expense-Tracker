@@ -52,11 +52,14 @@ def expense_page(catsvc, expsvc):
 
     st.subheader("Expense records")
     month = st.text_input("Filter by month (YYYY-MM, optional)", key="expense_month")
+
     try:
         items = expsvc.list_expenses(month=month or None)
+
     except ValueError as err:
         st.error(str(err))
         return
+    
     if items:
         st.dataframe(
             [{"ID": item.id, "Date": item.expense_date, "Category": item.category,
@@ -64,9 +67,11 @@ def expense_page(catsvc, expsvc):
             hide_index=True,
             use_container_width=True,
         )
+
         ids = {f"{item.id}: {item.description} ({item.expense_date})": item for item in items}
         label = st.selectbox("Select an expense to edit or delete", ids)
         item = ids[label]
+
         with st.expander("Edit selected expense"):
             with st.form("edit_expense_form"):
                 amt = st.text_input("Amount (Rs.)", value=str(item.amount))
@@ -76,14 +81,17 @@ def expense_page(catsvc, expsvc):
                 cat = st.selectbox("Category", names, index=pos)
                 desc = st.text_input("Description", value=item.description)
                 done = st.form_submit_button("Update expense")
+
             if done:
                 show_error(lambda: expsvc.update_expense(
                     item.id, amt, dt.isoformat(), opts[cat], desc
                 ))
+
         if st.button("Delete selected expense", type="secondary"):
             try:
                 expsvc.delete_expense(item.id)
                 st.success("Expense deleted successfully.")
+
             except ValueError as err:
                 st.error(str(err))
     else:
@@ -98,14 +106,17 @@ def category_page(catsvc):
         hide_index=True,
         use_container_width=True,
     )
+
     with st.form("add_category_form", clear_on_submit=True):
         name = st.text_input("New category name")
         done = st.form_submit_button("Add category")
+
     if done:
         show_error(lambda: catsvc.add_category(name))
 
     opts = category_options(cats)
     cat = st.selectbox("Choose an unused category to delete", opts)
+
     if st.button("Delete category", type="secondary"):
         try:
             catsvc.delete_category(opts[cat])
@@ -117,6 +128,7 @@ def category_page(catsvc):
 def report_page(repsvc):
     st.header("Monthly Report")
     month = st.text_input("Month (YYYY-MM)", value=date.today().strftime("%Y-%m"), key="report_month")
+
     if st.button("Show monthly report"):
         try:
             rows, total = repsvc.monthly_summary(month)
@@ -139,10 +151,12 @@ def budget_page(catsvc, budsvc):
     cats = catsvc.list_categories()
     opts = category_options(cats)
     month = st.text_input("Month (YYYY-MM)", value=date.today().strftime("%Y-%m"), key="budget_month")
+
     with st.form("budget_form"):
         cat = st.selectbox("Category", opts, key="budget_category")
         amount = st.text_input("Budget amount (Rs.)")
         done = st.form_submit_button("Save budget")
+        
     if done:
         show_error(lambda: budsvc.set_budget(opts[cat], month, amount))
 
