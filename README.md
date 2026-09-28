@@ -1,6 +1,6 @@
-# Smart Expense Tracker
 
-A simple Streamlit application that helps a student record daily expenses, organise them by category, set category budgets, and review monthly spending. It was created as a first-year CSE project for the VITyarthi Build Your Own Project assignment.
+# Smart Expense Tracker
+This is an application that I made for students to keep a record of their daily expenses, organise them by category, set category budgets, and review monthly spending. It was created as my first-year CSE project for the VITyarthi Build Your Own Project assignment. It has many features which are listed below.
 
 ## Features
 
@@ -17,9 +17,8 @@ A simple Streamlit application that helps a student record daily expenses, organ
 - Streamlit for the browser-based user interface
 - SQLite database through Python's built-in `sqlite3` module
 - Python `unittest` for validation and service tests
-- Git and GitHub for version control
 
-No third-party package is required.
+
 
 ## Project structure
 
@@ -30,7 +29,7 @@ models.py            Expense and BudgetStatus data classes
 services.py          category, expense, budget, and report operations
 validators.py        reusable input validation
 tests/               automated tests
-docs/                report source, diagrams, and screenshot placeholders
+docs/                project report
 statement.md         required project statement
 ```
 
@@ -60,19 +59,7 @@ Run all automated tests from the project folder:
 python -m unittest discover -s tests -v
 ```
 
-The tests use a temporary database and do not change the normal application data.
+The tests uses a temporary database and do not change the normal application data.
 
-## Screenshots
 
-Real screenshots should be captured after running the application and inserted in the marked locations in [`docs/project_report.md`](docs/project_report.md). Suggested screenshots are:
 
-- Main menu
-- Adding an expense
-- Monthly summary
-- Budget status showing an over-budget category
-
-## Assignment documents
-
-- [`statement.md`](statement.md) — problem statement, scope, users, and high-level features.
-- [`docs/project_report.md`](docs/project_report.md) — complete editable report source, including all required sections and diagrams.
-- [`docs/requirement_checklist.md`](docs/requirement_checklist.md) — assignment requirement mapping and verification checklist.
