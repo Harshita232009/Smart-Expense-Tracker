@@ -1,6 +1,9 @@
+# some validators that I made which are used in the project
+
 from datetime import datetime
 
 
+# this is the amount validator
 def valid_amount(value):
     try:
         amount = float(value)
@@ -13,6 +16,8 @@ def valid_amount(value):
     return round(amount, 2)
 
 
+
+# this the validator for date
 def valid_date(value):
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%Y-%m-%d")
@@ -21,6 +26,7 @@ def valid_date(value):
         raise ValueError("Date must use YYYY-MM-DD format.") from err
 
 
+# validatr for month
 def valid_month(value):
     try:
         return datetime.strptime(value, "%Y-%m").strftime("%Y-%m")
@@ -29,6 +35,7 @@ def valid_month(value):
         raise ValueError("Month must use YYYY-MM format.") from err
 
 
+#validate text , cant be empty and cant be greater than maxlen
 def valid_text(value, field, maxlen=100):
     text = (value or "").strip()
 

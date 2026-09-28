@@ -1,3 +1,6 @@
+
+#this file contains code for streamlit application..
+
 from datetime import date
 
 import streamlit as st
@@ -30,6 +33,8 @@ def category_options(cats):
     return {f"{item['name']} (ID: {item['id']})": item["id"] for item in cats}
 
 
+
+# this is for the expense page sectionn..
 def expense_page(catsvc, expsvc):
     st.header("Expenses")
     cats = catsvc.list_categories()
@@ -98,6 +103,7 @@ def expense_page(catsvc, expsvc):
         st.info("No expenses found for this filter.")
 
 
+# for category page 
 def category_page(catsvc):
     st.header("Categories")
     cats = catsvc.list_categories()
@@ -125,6 +131,7 @@ def category_page(catsvc):
             st.error(str(err))
 
 
+# this is for report page 
 def report_page(repsvc):
     st.header("Monthly Report")
     month = st.text_input("Month (YYYY-MM)", value=date.today().strftime("%Y-%m"), key="report_month")
@@ -146,6 +153,7 @@ def report_page(repsvc):
             st.error(str(err))
 
 
+# budget page 
 def budget_page(catsvc, budsvc):
     st.header("Monthly Budgets")
     cats = catsvc.list_categories()
@@ -156,7 +164,7 @@ def budget_page(catsvc, budsvc):
         cat = st.selectbox("Category", opts, key="budget_category")
         amount = st.text_input("Budget amount (Rs.)")
         done = st.form_submit_button("Save budget")
-        
+
     if done:
         show_error(lambda: budsvc.set_budget(opts[cat], month, amount))
 

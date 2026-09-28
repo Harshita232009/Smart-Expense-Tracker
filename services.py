@@ -1,7 +1,10 @@
+#this file contains important services for the project
+
 from models import BudgetStatus, Expense
 from validators import valid_amount, valid_date, valid_month, valid_text
 
 
+# category service - it contains important functions like list, add, delete categories
 class CategoryService:
     def __init__(self, db):
         self.db = db
@@ -32,6 +35,7 @@ class CategoryService:
                 raise ValueError("Category ID was not found.")
 
 
+# for expense service - add, exists, list, update, delete functions.. (conatins sql query as i used sqlite as database)
 class ExpenseService:
     def __init__(self, db):
         self.db = db
@@ -93,6 +97,7 @@ class ExpenseService:
                 raise ValueError("Expense ID was not found.")
 
 
+# budgest service - set budget, status
 class BudgetService:
     def __init__(self, db):
         self.db = db
@@ -124,6 +129,7 @@ class BudgetService:
         return [BudgetStatus(row["name"], row["budget"], row["spent"]) for row in rows]
 
 
+#report service - monthly summary functionality
 class ReportService:
     def __init__(self, db):
         self.db = db
